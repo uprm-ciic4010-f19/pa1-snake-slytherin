@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class Player {
 	
-	int speed = 7;
+	int speed = 7; //last digit of student id
     public int lenght;
     public boolean justAte;
     private Handler handler;
@@ -48,7 +48,7 @@ public class Player {
             direction="Left";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
             direction="Right";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){ //snake gets bigger when N is clicked
             System.out.println("Tail added");
         	Eat(true, false);
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){ //speed increase when + is clicked
