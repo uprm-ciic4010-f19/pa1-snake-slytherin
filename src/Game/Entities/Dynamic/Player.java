@@ -10,7 +10,8 @@ import java.util.Random;
  * Created by AlexVR on 7/2/2018.
  */
 public class Player {
-
+	
+	int speed = 7;
     public int lenght;
     public boolean justAte;
     private Handler handler;
@@ -35,7 +36,7 @@ public class Player {
 
     public void tick(){
         moveCounter++;
-        if(moveCounter>=5) {
+        if(moveCounter>=speed) {
             checkCollisionAndMove();
             moveCounter=0;
         }
@@ -47,6 +48,15 @@ public class Player {
             direction="Left";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
             direction="Right";
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){
+            System.out.println("Tail added");
+        	Eat(true, false);
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_EQUALS)){ //speed increase when + is clicked
+        	speed--;
+            System.out.println("speed aumentada: " + speed);
+        }if(handler.getKeyManager().keyJustPressed(45)){ //speed decrease when - is clicked
+        	speed++;
+            System.out.println("speed decreased: " + speed);
         }
 
     }
@@ -89,7 +99,7 @@ public class Player {
 
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
-            Eat();
+            Eat(false, true); //false parameter added
         }
 
         if(!handler.getWorld().body.isEmpty()) {
@@ -102,11 +112,11 @@ public class Player {
 
     public void render(Graphics g,Boolean[][] playeLocation){
         Random r = new Random();
-        Color color = new Color(r.nextInt());
+        Color color = new Color(r.nextInt()); //multicolor
         
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
-                g.setColor(Color.green);//snake color
+                g.setColor(color);//snake multicolor
                
 
                 if(playeLocation[i][j]||handler.getWorld().appleLocation[i][j]){
@@ -121,11 +131,15 @@ public class Player {
 
     }
 
-    public void Eat(){
+    public void Eat(boolean appleOnBoardBool, boolean speedActivate){ //parameter added
+    	if (speedActivate) { //manage the speed increaser 
+    		speed--;
+    	}
+    	System.out.println("Speed: " + speed); //print speed
         lenght++;
         Tail tail= null;
         handler.getWorld().appleLocation[xCoord][yCoord]=false;
-        handler.getWorld().appleOnBoard=false;
+        handler.getWorld().appleOnBoard=appleOnBoardBool;
         switch (direction){
             case "Left":
                 if( handler.getWorld().body.isEmpty()){
