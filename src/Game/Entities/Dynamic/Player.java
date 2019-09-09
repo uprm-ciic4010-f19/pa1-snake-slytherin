@@ -1,10 +1,15 @@
 package Game.Entities.Dynamic;
 
+import Main.GameSetUp;
 import Main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
+
+import javax.swing.JFrame;
+
+import Game.GameStates.State;
 
 /**
  * Created by AlexVR on 7/2/2018.
@@ -40,13 +45,14 @@ public class Player {
             checkCollisionAndMove();
             moveCounter=0;
         }
-        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)){
+        // Move snake and prevent backtracking
+        if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_UP)&& direction != "Down"){
             direction="Up";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_DOWN)&& direction != "Up"){
             direction="Down";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_LEFT)&& direction != "Right"){
             direction="Left";
-        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)){
+        }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_RIGHT)&& direction != "Left"){
             direction="Right";
         }if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_N)){ //snake gets bigger when N is clicked
             System.out.println("Tail added");
@@ -69,6 +75,7 @@ public class Player {
             case "Left":
                 if(xCoord==0){
                     kill();
+                    xCoord=handler.getWorld().GridWidthHeightPixelCount-1; //snake teleports in the opposite direction
                 }else{
                     xCoord--;
                 }
@@ -76,6 +83,7 @@ public class Player {
             case "Right":
                 if(xCoord==handler.getWorld().GridWidthHeightPixelCount-1){
                     kill();
+                    xCoord=0;
                 }else{
                     xCoord++;
                 }
@@ -83,6 +91,8 @@ public class Player {
             case "Up":
                 if(yCoord==0){
                     kill();
+                    yCoord=handler.getWorld().GridWidthHeightPixelCount-1;
+
                 }else{
                     yCoord--;
                 }
@@ -90,13 +100,16 @@ public class Player {
             case "Down":
                 if(yCoord==handler.getWorld().GridWidthHeightPixelCount-1){
                     kill();
+                    yCoord=0;
                 }else{
                     yCoord++;
                 }
                 break;
         }
         handler.getWorld().playerLocation[xCoord][yCoord]=true;
-
+        
+        	
+        
 
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat(false, true); //false parameter added
@@ -251,8 +264,11 @@ public class Player {
                 handler.getWorld().playerLocation[i][j]=false;
 
             }
-        }
+        
+        }	
+        
     }
+    
 
     public boolean isJustAte() {
         return justAte;

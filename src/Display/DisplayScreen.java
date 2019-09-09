@@ -53,6 +53,13 @@ public class DisplayScreen {
         frame.add(canvas);
         frame.pack();
     }
+//    public void gameOver() {
+//    	JFrame over=new JFrame();
+//    	over.setLocation(width/20, height/20);
+//        over.setSize(300,300);
+//        over.setTitle("GAME OVER");
+//        over.setVisible(true);
+//    }
 
     public Canvas getCanvas(){
         return canvas;
@@ -61,5 +68,5 @@ public class DisplayScreen {
     public JFrame getFrame(){
         return frame;
     }
-
+  
 }

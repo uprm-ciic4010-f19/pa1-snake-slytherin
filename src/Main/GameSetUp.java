@@ -105,8 +105,9 @@ public class GameSetUp implements Runnable {
 
     public void reStart(){
         gameState = new GameState(handler);
+        
     }
-
+    
     public synchronized void start(){
         if(running)
             return;

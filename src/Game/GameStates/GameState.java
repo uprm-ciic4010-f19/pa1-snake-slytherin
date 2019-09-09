@@ -29,9 +29,8 @@ public class GameState extends State {
             }
         }
         handler.getWorld().playerLocation[handler.getWorld().player.xCoord][handler.getWorld().player.yCoord] =true;
-
-
     }
+   
 
     @Override
     public void tick() {
