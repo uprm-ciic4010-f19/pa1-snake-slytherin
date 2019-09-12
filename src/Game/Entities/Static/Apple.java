@@ -17,6 +17,23 @@ public class Apple {
         this.xCoord=x;
         this.yCoord=y;
     }
+    public boolean isGood() {
+    	System.out.println("isGood");
+    	boolean badApple = false;
+    	
+		int steps=handler.getWorld().GridWidthHeightPixelCount-1;
+		 
+    		if(handler.getWorld().player.xCoord==steps) {
+    			badApple=true;
+    			handler.getWorld().player.EatRotten(badApple, true);
+    			}
+    		if(handler.getWorld().player.yCoord==steps) {
+    				badApple=true;
+    				handler.getWorld().player.EatRotten(badApple, true);
+    			}
 
-
+		return badApple;
+	
+    	}
+    
 }

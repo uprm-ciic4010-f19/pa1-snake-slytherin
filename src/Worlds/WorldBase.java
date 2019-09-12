@@ -8,11 +8,15 @@ import Main.Handler;
 import java.awt.*;
 import java.util.LinkedList;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 
 /**
  * Created by AlexVR on 7/2/2018.
  */
 public abstract class WorldBase {
+    private JFrame frame;
 
     //How many pixels are from left to right
     //How many pixels are from top to bottom
@@ -29,13 +33,16 @@ public abstract class WorldBase {
 
 
     public Boolean appleOnBoard;
-    protected Apple apple;
+    public Apple apple;
     public Boolean[][] appleLocation;
 
 
     public Boolean[][] playerLocation;
+  
 
     public LinkedList<Tail> body = new LinkedList<>();
+    
+
 
 
     public WorldBase(Handler handler){
@@ -50,9 +57,17 @@ public abstract class WorldBase {
 
 
     }
+    public void gameOver() {
+    	
+    	JOptionPane.showMessageDialog( frame, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+		System.exit(0);
+
+    }
+
 
     public void render(Graphics g){
 
+    	
 //        for (int i = 0; i <= 800; i = i + GridPixelsize) {
 //
 //            g.setColor(Color.black);// grid line color
