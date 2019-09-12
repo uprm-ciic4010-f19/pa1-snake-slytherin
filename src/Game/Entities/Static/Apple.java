@@ -21,16 +21,23 @@ public class Apple {
     	System.out.println("isGood");
     	boolean badApple = false;
     	
-		int steps=handler.getWorld().GridWidthHeightPixelCount-1;
-		 
-    		if(handler.getWorld().player.xCoord==steps) {
-    			badApple=true;
-    			handler.getWorld().player.EatRotten(badApple, true);
-    			}
-    		if(handler.getWorld().player.yCoord==steps) {
-    				badApple=true;
-    				handler.getWorld().player.EatRotten(badApple, true);
-    			}
+		int steps=handler.getWorld().GridWidthHeightPixelCount;
+		int playerSteps = handler.getWorld().player.xCoord + handler.getWorld().player.yCoord  ;
+    	
+		if(steps == playerSteps) {
+			System.out.println(playerSteps);
+			badApple=true;
+			handler.getWorld().player.EatRotten(badApple, true);
+		}
+	
+//    		if(handler.getWorld().player.xCoord==steps||handler.getWorld().player.yCoord==steps) {
+//    			badApple=true;
+//    			handler.getWorld().player.EatRotten(badApple, true);
+//    			}
+////    		if(handler.getWorld().player.yCoord==steps) {
+////    				badApple=true;
+////    				handler.getWorld().player.EatRotten(badApple, true);
+////    			}
 
 		return badApple;
 	

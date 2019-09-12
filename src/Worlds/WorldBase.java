@@ -60,7 +60,7 @@ public abstract class WorldBase {
     public void gameOver() {
     	
     	JOptionPane.showMessageDialog( frame, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
-		System.exit(0);
+    	System.exit(0);
 
     }
 
