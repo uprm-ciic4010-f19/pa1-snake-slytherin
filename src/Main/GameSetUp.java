@@ -11,6 +11,7 @@ import Resources.Images;
 
 import javax.sound.sampled.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -112,14 +113,14 @@ public class GameSetUp implements Runnable {
         if(running)
             return;
         running = true;
-        //this runs the run method in this  class
+        //this runs the run method in this class
         thread = new Thread(this);
         thread.start();
     }
 
     public void run(){
 
-        //initiallizes everything in order to run without breaking
+        //Initializes everything in order to run without breaking
         init();
 
         int fps = 60;
@@ -156,6 +157,9 @@ public class GameSetUp implements Runnable {
     }
 
     private void tick(){
+    	if(handler.getKeyManager().keyJustPressed(KeyEvent.VK_ESCAPE)){ //escape key for pause menu
+    		State.setState(pauseState);
+    	}
         //checks for key types and manages them
         keyManager.tick();
 
