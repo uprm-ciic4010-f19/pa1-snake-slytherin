@@ -17,20 +17,23 @@ public class PauseState extends State {
 
     public PauseState(Handler handler) {
         super(handler);
+        int test = 330;
+        int test2 = 330;
         uiManager = new UIManager(handler);
         handler.getMouseManager().setUimanager(uiManager);
 
-        uiManager.addObjects(new UIImageButton(56, 223, 128, 64, Images.Resume, () -> {
+        uiManager.addObjects(new UIImageButton(test, test2, 128, 64, Images.Resume, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().gameState);
         }));
 
-        uiManager.addObjects(new UIImageButton(56, 223+(64+16), 128, 64, Images.Options, () -> {
+        uiManager.addObjects(new UIImageButton(test, test2+(64+16), 128, 64, Images.Options, () -> {
             handler.getMouseManager().setUimanager(null);
-            State.setState(handler.getGame().menuState);
+            new GameState(handler);
+            State.setState(handler.getGame().gameState);
         }));
 
-        uiManager.addObjects(new UIImageButton(56, (223+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
+        uiManager.addObjects(new UIImageButton(test, (test2+(64+16))+(64+16), 128, 64, Images.BTitle, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
         }));
@@ -60,7 +63,7 @@ public class PauseState extends State {
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(Images.Pause,0,0,800,600,null);
+        g.drawImage(Images.Pause,-20,0,800,800,null);
         uiManager.Render(g);
 
     }
