@@ -11,36 +11,30 @@ public class Apple {
 
     public int xCoord;
     public int yCoord;
+    public boolean good;
+   
 
     public Apple(Handler handler,int x, int y){
         this.handler=handler;
         this.xCoord=x;
         this.yCoord=y;
+        this.good = true;
     }
-    public boolean isGood() {
-    	System.out.println("isGood");
-    	boolean badApple = false;
+    public boolean isGood(int steps) {
     	
-		int steps=handler.getWorld().GridWidthHeightPixelCount;
-		int playerSteps = handler.getWorld().player.xCoord + handler.getWorld().player.yCoord  ;
-    	
-		if(steps == playerSteps) {
-			System.out.println(playerSteps);
-			badApple=true;
-			handler.getWorld().player.EatRotten(badApple, true);
+		if(steps==400) {
+			this.setGood(false);
+			return false;
+			
 		}
+		
+		return true;
 	
-//    		if(handler.getWorld().player.xCoord==steps||handler.getWorld().player.yCoord==steps) {
-//    			badApple=true;
-//    			handler.getWorld().player.EatRotten(badApple, true);
-//    			}
-////    		if(handler.getWorld().player.yCoord==steps) {
-////    				badApple=true;
-////    				handler.getWorld().player.EatRotten(badApple, true);
-////    			}
-
-		return badApple;
-	
-    	}
+    }
     
-}
+    public void setGood(boolean good) {
+    	this.good = good;
+    	
+    }
+    
+   }
