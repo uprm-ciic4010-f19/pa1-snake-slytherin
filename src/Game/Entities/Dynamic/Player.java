@@ -1,15 +1,10 @@
 package Game.Entities.Dynamic;
 
-import Main.GameSetUp;
 import Main.Handler;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
-
-import javax.swing.JFrame;
-
-import Game.GameStates.State;
 
 /**
  * Created by AlexVR on 7/2/2018.
@@ -20,7 +15,7 @@ public class Player {
     public int lenght;
     public boolean justAte;
     private Handler handler;
-
+    public double score;
     public int xCoord;
     public int yCoord;
 
@@ -76,7 +71,7 @@ public class Player {
             case "Left":
                 if(xCoord==0){
                 	
-                    xCoord=handler.getWorld().GridWidthHeightPixelCount-1; //snake teleports in the opposite direction
+                    xCoord=handler.getWorld().GridWidthHeightPixelCount-1; //snake teleport in the opposite direction
                 }else{
                     xCoord--;
                 }
@@ -111,12 +106,14 @@ public class Player {
         
 
         if(!handler.getWorld().body.isEmpty()) {
+        	
             handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y] = false;
             handler.getWorld().body.removeLast();
             handler.getWorld().body.addFirst(new Tail(x, y,handler));
         }
         if(handler.getWorld().appleLocation[xCoord][yCoord]){
             Eat(false, true); //false parameter added
+            
            
         }
         else {
@@ -130,6 +127,7 @@ public class Player {
         			if(yCoord==handler.getWorld().body.get(i).y) {
         				System.out.println("Collision w body");
         				handler.getWorld().gameOver();
+        				
         			}
         		}
         	}
@@ -141,6 +139,10 @@ public class Player {
     public void render(Graphics g, Boolean[][] playerLocation){
         Random r = new Random();
         Color color = new Color(r.nextInt()); //multicolor
+        
+        g.setFont(new Font("Times New Roman", Font.BOLD, 22));
+        g.setColor(color);
+        g.drawString("Score: " + score, 50, 50); //draws the score
         
         for (int i = 0; i < handler.getWorld().GridWidthHeightPixelCount; i++) {
             for (int j = 0; j < handler.getWorld().GridWidthHeightPixelCount; j++) {
@@ -288,6 +290,7 @@ public class Player {
         if(handler.getWorld().apple.good || !regularEat) {
         	if(regularEat) {
         		speed--;
+        		score += Math.sqrt((2*score) + 1);
         	}
         
         handler.getWorld().body.addLast(tail);
@@ -300,6 +303,11 @@ public class Player {
         		 handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
                  handler.getWorld().body.removeLast();
                  System.out.println("Removed tail");
+                 
+                 if (score - Math.sqrt((2*score) + 1) > 0) { //score has to be more than 0
+                	 score -= Math.sqrt((2*score) + 1);
+				}
+                 
         	 }
         	 kill();
         }

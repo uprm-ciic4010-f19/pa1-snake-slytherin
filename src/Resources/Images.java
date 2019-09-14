@@ -2,6 +2,7 @@ package Resources;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -9,23 +10,27 @@ import java.io.IOException;
  * Created by AlexVR on 7/1/2018.
  */
 public class Images {
-
-
     public static BufferedImage[] butstart;
     public static BufferedImage title;
     public static BufferedImage Pause;
     public static BufferedImage[] Resume;
     public static BufferedImage[] BTitle;
     public static BufferedImage[] Options;
+    public static BufferedImage[] BMute;
+    
     public static ImageIcon icon;
 
-    public Images() {
 
+    public Images() {
+    	
         butstart = new BufferedImage[3];
         Resume = new BufferedImage[2];
         BTitle = new BufferedImage[2];
         Options = new BufferedImage[2];
-
+        BMute = new BufferedImage[2];
+        
+        
+        
         try {
 
             title = ImageIO.read(getClass().getResourceAsStream("/Sheets/Title.png"));
@@ -39,7 +44,12 @@ public class Images {
             butstart[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/NormBut.png"));//normbut
             butstart[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/HoverBut.png"));//hoverbut
             butstart[2]= ImageIO.read(getClass().getResourceAsStream("/Buttons/ClickedBut.png"));//clickbut
-
+            
+            
+            BTitle[1] = ImageIO.read(getClass().getResourceAsStream("/Buttons/BTitleP.png"));
+            BMute[0]= ImageIO.read(getClass().getResourceAsStream("/Buttons/mute.png"));//hoverbut
+            BMute[1]= ImageIO.read(getClass().getResourceAsStream("/Buttons/mutep.png"));//hoverbut
+            
             icon =  new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/Sheets/icon.png")));
 
 

@@ -1,12 +1,15 @@
 package Game.GameStates;
 
 import Main.GameSetUp;
+
 import Main.Handler;
 import Resources.Images;
 import UI.UIImageButton;
 import UI.UIManager;
 
+
 import java.awt.*;
+
 
 /**
  * Created by AlexVR on 7/1/2018.
@@ -39,14 +42,17 @@ public class PauseState extends State {
             State.setState(handler.getGame().menuState);
         }));
         
-        uiManager.addObjects(new UIImageButton(275, (330+(64+16))+(64+16)+(64+16), 225, 83, Images.BTitle, () -> {
+        uiManager.addObjects(new UIImageButton(275, (330+(64+16))+(64+16)+(64+16), 225, 83, Images.BMute, () -> {
             handler.getMouseManager().setUimanager(null);
             if (counter) {
             	GameSetUp.getAudioClip().stop();
             	counter = false;
+            	
+            	
 			}else {
 				GameSetUp.getAudioClip().start();
 				counter = true;
+				
             	
 			}
             
