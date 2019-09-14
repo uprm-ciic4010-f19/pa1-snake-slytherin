@@ -3,6 +3,7 @@ package Worlds;
 import Game.Entities.Dynamic.Player;
 import Game.Entities.Dynamic.Tail;
 import Game.Entities.Static.Apple;
+import Game.GameStates.State;
 import Main.Handler;
 
 import java.awt.*;
@@ -60,7 +61,7 @@ public abstract class WorldBase {
     public void gameOver() {
     	
     	JOptionPane.showMessageDialog( frame, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
-    	System.exit(0);
+    	State.setState(handler.getGame().gameState);
 
     }
 

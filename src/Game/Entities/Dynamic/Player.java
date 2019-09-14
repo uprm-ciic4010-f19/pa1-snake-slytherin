@@ -6,6 +6,9 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import Game.GameStates.MenuState;
+import Game.GameStates.State;
+
 /**
  * Created by AlexVR on 7/2/2018.
  */
@@ -127,7 +130,7 @@ public class Player {
         			if(yCoord==handler.getWorld().body.get(i).y) {
         				System.out.println("Collision w body");
         				handler.getWorld().gameOver();
-        				
+        				      				
         			}
         		}
         	}
