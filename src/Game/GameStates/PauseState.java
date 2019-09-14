@@ -1,5 +1,6 @@
 package Game.GameStates;
 
+import Main.GameSetUp;
 import Main.Handler;
 import Resources.Images;
 import UI.UIImageButton;
@@ -14,6 +15,7 @@ public class PauseState extends State {
 
     private int count = 0;
     private UIManager uiManager;
+    private boolean counter = true;
 
     public PauseState(Handler handler) {
         super(handler);
@@ -35,6 +37,19 @@ public class PauseState extends State {
         uiManager.addObjects(new UIImageButton(275, (330+(64+16))+(64+16), 225, 83, Images.BTitle, () -> {
             handler.getMouseManager().setUimanager(null);
             State.setState(handler.getGame().menuState);
+        }));
+        
+        uiManager.addObjects(new UIImageButton(275, (330+(64+16))+(64+16)+(64+16), 225, 83, Images.BTitle, () -> {
+            handler.getMouseManager().setUimanager(null);
+            if (counter) {
+            	GameSetUp.getAudioClip().stop();
+            	counter = false;
+			}else {
+				GameSetUp.getAudioClip().start();
+				counter = true;
+            	
+			}
+            
         }));
 
 
