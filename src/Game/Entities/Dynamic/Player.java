@@ -296,7 +296,7 @@ public class Player {
         else {
         	
         	speed++;	
-        	 if(handler.getWorld().body.size() > 1) {
+        	 if(handler.getWorld().body.size() >= 1) {
         		 handler.getWorld().playerLocation[handler.getWorld().body.getLast().x][handler.getWorld().body.getLast().y]=false;
                  handler.getWorld().body.removeLast();
                  System.out.println("Removed tail");
